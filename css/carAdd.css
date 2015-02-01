@@ -1,0 +1,36 @@
+.add .col {
+    margin: 5px 0;
+}
+
+.add .col.label {
+    text-align: right;
+    width:      128px;
+}
+.add .col.info {
+    margin:     0 5px;
+    text-align: center;
+    width:      12px;
+}
+.add .col.form {
+    float:      left;
+    text-align: left;	
+}
+
+.add .col.form > input[type='text'] {
+    width: 320px;
+}
+.add .col.form > input[type='submit'],
+.add .col.form > input[type='file'] {
+    width: 324px;
+}
+.add .col.form > textarea {
+    width: 318px;
+}
+.add .col.form > select {
+    width: 324px;
+}
+
+.hint--error {
+    color: red;
+}
+

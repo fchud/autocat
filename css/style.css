@@ -1,0 +1,63 @@
+html, body {
+    background:  black;
+    color:       white;
+    font-family: monospace;
+    margin:      0;
+    padding:     0;
+}
+a {
+    color: white;
+}
+a:active {
+    color: gray;
+}
+pre {
+    white-space: pre-wrap;
+    margin:      0;
+}
+.header, .footer {
+    margin:  0 10px;
+    padding: 5px;
+}
+.content {
+    margin:  10px 0;
+    padding: 15px;
+}
+.header, .footer {
+    border: #204080 1px solid;
+}
+.content {
+    word-wrap: normal;
+    border:    #80c0ff 1px solid;
+}
+.container {
+    position: relative;
+}
+
+.row {
+}
+.row::before, .row::after {
+    display: table;
+    content: '';
+}
+.row::after {
+    clear: both;
+}
+.col.left {
+    float: left;
+}
+.col.right {
+    float: right;
+}
+
+.row.nav .col {
+    margin-right: 10px; 
+}
+
+/*
+.header div, .footer div {
+    margin-right: 10px;
+}
+
+
+*/

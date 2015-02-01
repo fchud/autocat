@@ -1,0 +1,15 @@
+.info .col {
+    margin: 5px 0;
+}
+
+.info .col.label {
+    color:      #808080;
+    font-style: italic;
+    text-align: right;
+    width:      128px;
+}
+.info .col.data {
+    margin-left: 16px;
+    text-align:  left;	
+    width:       768px;
+}

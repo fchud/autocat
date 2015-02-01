@@ -1,0 +1,15 @@
+INSERT INTO `dict_color` (`name`) VALUES ('бежевый');
+INSERT INTO `dict_color` (`name`) VALUES ('белый');
+INSERT INTO `dict_color` (`name`) VALUES ('голубой');
+INSERT INTO `dict_color` (`name`) VALUES ('желтый');
+INSERT INTO `dict_color` (`name`) VALUES ('зеленый');
+INSERT INTO `dict_color` (`name`) VALUES ('золотой');
+INSERT INTO `dict_color` (`name`) VALUES ('коричневый');
+INSERT INTO `dict_color` (`name`) VALUES ('красный');
+INSERT INTO `dict_color` (`name`) VALUES ('оранжевый');
+INSERT INTO `dict_color` (`name`) VALUES ('пурпурный');
+INSERT INTO `dict_color` (`name`) VALUES ('серебристый');
+INSERT INTO `dict_color` (`name`) VALUES ('серый');
+INSERT INTO `dict_color` (`name`) VALUES ('синий');
+INSERT INTO `dict_color` (`name`) VALUES ('фиолетовый');
+INSERT INTO `dict_color` (`name`) VALUES ('чёрный');

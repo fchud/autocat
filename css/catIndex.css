@@ -1,0 +1,51 @@
+.cat a {
+    text-decoration: none;
+}
+
+.col.thumb {
+    text-align: right;
+    width:      160px;
+}
+.col.model {
+    width: 192px;
+}
+.col.price {
+    width: 128px;
+}
+.col.descr {
+    width: 288px;
+}
+
+.cat .col img {
+    max-height: 120px;
+    max-width:  160px;
+}
+.cat .col {
+    height:   120px;
+    padding:  5px;
+    overflow: hidden;
+}
+
+.cat .col {
+    border-bottom: 1px #808080 dotted;
+    border-right:  1px #808080 dotted;
+}
+.cat .col:last-child {
+    border-right: 0;
+}
+.cat:first-child .col {
+    color:         #808080;
+    font-style:    italic;
+    border-bottom: 1px #808080 solid;
+    height:        20px;
+}
+.cat:last-child .col {
+    border-bottom: 0;
+}
+
+.page .col {
+    text-align: center;
+    border:     0;
+    margin:     10px 5px;
+    width:      32px;
+}
