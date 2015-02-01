@@ -9,9 +9,11 @@ namespace fchud {
         }
 
         public static function autoload($f) {
+            global $docRoot;
+
             $file = \str_replace('\\', '/', $f);
-            $path = \filter_input(INPUT_SERVER, 'DOCUMENT_ROOT') . '/lib';
-            $filepath = \filter_input(INPUT_SERVER, 'DOCUMENT_ROOT') . '/lib/' . $file . '.php';
+            $path = $docRoot . '/lib';
+            $filepath = $docRoot . '/lib/' . $file . '.php';
 
             if (\file_exists($filepath)) {
                 require_once($filepath);

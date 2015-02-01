@@ -113,11 +113,11 @@ class CarInfo {
             if ($handle !== false) {
                 while (($thumb = readdir($handle)) !== false) {
                     if ($thumb != '.' && $thumb != '..') {
-                        $photo = $this->photoPath . $thumb;
+                        $photo = tools::formatUrl($this->photoPath) . $thumb;
                         if (file_exists($photo)) {
                             $photos[] = [
                                 'photo' => $photo,
-                                'thumb' => "{$this->thumbsPath}{$thumb}",
+                                'thumb' => tools::formatUrl($this->thumbsPath) . $thumb,
                             ];
                         }
                     }

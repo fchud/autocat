@@ -33,7 +33,6 @@ class DefaultController {
 
         $this->reqMethod = filter_input(INPUT_SERVER, 'REQUEST_METHOD');
 
-
         $this->dbSet = $settings['dbSet'];
         $this->mvcSet = $settings['mvcSet'];
         $this->mvcPath = tools::formatPath($this->mvcSet['mvcPath']);
@@ -45,7 +44,7 @@ class DefaultController {
 
         $this->defModule = ucfirst($settings['defaultModule']);
         $this->imagesPath = tools::formatPath($settings['images']);
-        $this->blankImage = $this->imagesPath . $settings['nophoto'];
+        $this->blankImage = tools::formatUrl($settings['images']) . $settings['nophoto'];
         $this->uploadsPath = tools::formatPath($settings['uploads']);
         $this->photoPath = $this->uploadsPath . tools::formatPath($settings['photo']);
         $this->thumbsPath = $this->uploadsPath . tools::formatPath($settings['thumbs']);
@@ -76,7 +75,7 @@ class DefaultController {
     }
 
     private function redirect($query) {
-        $location = 'http://' . filter_input(INPUT_SERVER, 'SERVER_NAME') . '/?' . $query;
+        $location = 'http://' . filter_input(INPUT_SERVER, 'SERVER_NAME') . $this->urlPath . '?' . $query;
 
         header("Location: $location");
         die;

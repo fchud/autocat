@@ -6,8 +6,8 @@ use fchud\simple\Tools as tools;
 function genPages($carsCount, $currentPage) {
     $pages = tools::paginate($carsCount, 5, $currentPage, 15);
 
-    $templateRow = "<div class='row page'>[@cells]</div>";
-    $pageCell = "<div class='col left'><a href='/?catIndex=[@catId]'>[@catId]</a></div>";
+    $templateRow = "<div class='row page'>[@cells]</div>\n";
+    $pageCell = "<div class='col left'><a href='?catIndex=[@catId]'>[@catId]</a></div>";
     $blankCell = "<div class='col left current'>[@catId]</div>";
 
     $allCells = '';
@@ -49,9 +49,9 @@ $pagesRow = genPages($carsCount, $currentPage);
 
 $cars = $$module->getCars();
 $template = "    <div class='row cat'>
-        <a href='/?carInfo=[@id]'>
+        <a href='?carInfo=[@id]'>
             <div class='col left thumb'>
-                <img src=[@thumb] />
+                <img src='[@thumb]' />
             </div>
             <div class='col left model'>
                 [@model]

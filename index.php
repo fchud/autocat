@@ -2,7 +2,9 @@
 
 defined('SITE_ENV') or define('SITE_ENV', 'debug');
 
-set_include_path(get_include_path() . PATH_SEPARATOR . 'lib');
+$docRoot = pathinfo(__FILE__, PATHINFO_DIRNAME);
+
+set_include_path(get_include_path() . PATH_SEPARATOR . $docRoot . DIRECTORY_SEPARATOR . 'lib');
 
 require_once 'fchud/Classloader.php';
 
@@ -15,7 +17,6 @@ $mvc = $settings['mvcSet'];
 $controller = tools::formatPath($mvc['mvcPath'])
         . tools::formatPath($mvc['controlersPath'])
         . $mvc['siteController'] . '.php';
-
 
 try {
     require_once $controller;

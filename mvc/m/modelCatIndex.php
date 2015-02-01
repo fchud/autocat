@@ -86,9 +86,8 @@ class CatIndex {
                 if ($handle !== false) {
                     while (($photo = readdir($handle)) !== false) {
                         if (($photo != '.') && ($photo != '..')) {
-                            $thumb = "{$thumbs}{$photo}";
                             closedir($handle);
-                            return $thumb;
+                            return tools::formatUrl($thumbs) . $photo;
                         }
                     }
                     closedir($handle);

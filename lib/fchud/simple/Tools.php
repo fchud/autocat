@@ -108,7 +108,6 @@ class Tools {
         ];
 
         $newUrl = strtr(self::formatPath($path), $replace);
-
         return $newUrl;
     }
 
