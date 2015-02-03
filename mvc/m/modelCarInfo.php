@@ -53,10 +53,15 @@ class CarInfo {
             'dict_body body',
         ];
         $conds = [
-            'brand.brand_id = model.brand_id',
-            'model.model_id = cat.model_id',
-            'body.body_id = cat.body_id',
-            'cat.cat_id = ' . $this->carId,
+            'key' => [
+                'brand.brand_id = model.brand_id',
+                'model.model_id = cat.model_id',
+                'body.body_id = cat.body_id',
+                'cat.cat_id = ?',
+            ],
+            'val' => [
+                $this->carId,
+            ],
         ];
 
         try {
@@ -80,9 +85,14 @@ class CarInfo {
             'catalog cat',
         ];
         $conds = [
-            'dco.color_id = cco.color_id',
-            'cco.cat_id = cat.cat_id',
-            'cat.cat_id = ' . $this->carId,
+            'key' => [
+                'dco.color_id = cco.color_id',
+                'cco.cat_id = cat.cat_id',
+                'cat.cat_id = ?',
+            ],
+            'val' => [
+                $this->carId,
+            ],
         ];
         $options = [
             'ORDER BY dco.name ASC',

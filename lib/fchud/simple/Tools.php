@@ -118,15 +118,19 @@ class Tools {
      * @return string|array html-safe string or array of strings
      */
     public static function safeString($object) {
-        if (!is_array($object)) {
+        if (is_string($object)) {
             return htmlspecialchars($object);
         }
 
-        $temp = [];
-        foreach ($object as $key => $val) {
-            $temp[$key] = htmlspecialchars($val);
+        if (is_array($object)) {
+            $temp = [];
+            foreach ($object as $key => $val) {
+                $temp[self::safeString($key)] = self::safeString($val);
+            }
+            return $temp;
         }
-        return $temp;
+        
+        return $object;
     }
 
     /**

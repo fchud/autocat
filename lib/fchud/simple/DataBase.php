@@ -18,12 +18,20 @@ class DataBase {
     private $pdo;
 
     /**
+     *
+     * @var string schema name
+     */
+    private $schema;
+
+    /**
      * 
      * @param array $dbSet expects ['dsn'], ['username'] and ['password'] elements as strings
      */
     public function __construct($dbSet) {
         try {
-            $this->pdo = new PDO($dbSet['dsn'], $dbSet['username'], $dbSet['password']);
+            $this->schema = $dbSet['schema'];
+            $dsn = "{$dbSet['provider']}:host={$dbSet['host']};dbname={$dbSet['schema']}";
+            $this->pdo = new PDO($dsn, $dbSet['username'], $dbSet['password']);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (Exception $ex) {
             debug::showEx($ex);
@@ -118,6 +126,36 @@ class DataBase {
 
         $lastID = $this->pdo->lastInsertId();
         if (!$lastID && $uniq) {
+            $c = [
+                'COLUMN_NAME AS name',
+                'CHARACTER_MAXIMUM_LENGTH AS len',
+            ];
+            $t = [
+                'INFORMATION_SCHEMA.COLUMNS',
+            ];
+            $w = [
+                'key' => [
+                    'TABLE_NAME = ?',
+                    'TABLE_SCHEMA = ?',
+                ],
+                'val' => [
+                    'dict_brand',
+                    'autocat',
+                ],
+            ];
+            try {
+                $result = $this->select($t, $c, $w);
+                
+                foreach ($result as $row) {
+                    $colName = ":{$row['name']}";
+                    if (isset($args[$colName])) {
+                        $args[$colName] = substr($args[$colName], 0, $row['len']);
+                    }
+                }
+            } catch (Exception $ex) {
+                debug::addEx($ex);
+            }
+
             $select = "SELECT {$uniq} FROM {$table} where {$where}";
 
             $id = $this->getSome($select, $args);
@@ -132,9 +170,9 @@ class DataBase {
     /**
      * selects $what (columns) from $from (tables) with specified $when (conditions)
      * 
-     * @param array $from tables
-     * @param array $what columns
-     * @param array $when conditions
+     * @param array $from list of tables
+     * @param array $what list of columns
+     * @param array $when array of conditions ['key' => ['a = b', 'b = ?', ...], 'val' => [...]]
      * @param array $options other specifiers like 'limit, order, ...'
      * @return array returns an array containing all of the remaining rows in the result set.
      *  the array represents each row as either an array of column values or an object
@@ -144,12 +182,13 @@ class DataBase {
     public function select($from, $what = [], $when = [], $options = []) {
         $cols = $what ? implode(', ', $what) : '*';
         $tables = implode(', ', $from);
-        $where = $when ? ' WHERE ' . implode(' AND ', $when) : '';
         $other = $options ? ' ' . implode(' ', $options) : '';
+        $where = $when ? ' WHERE ' . implode(' AND ', $when['key']) : '';
         $select = "SELECT {$cols} FROM {$tables}{$where}{$other}";
 
-        $rows = $this->getSome($select);
+        $args = $when ? $when['val'] : [];
 
+        $rows = $this->getSome($select, $args);
         return $rows;
     }
 

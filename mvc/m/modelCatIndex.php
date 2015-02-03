@@ -63,8 +63,11 @@ class CatIndex {
             'dict_model model',
         ];
         $conds = [
-            'model.brand_id = brand.brand_id',
-            'cat.model_id = model.model_id',
+            'key' => [
+                'model.brand_id = brand.brand_id',
+                'cat.model_id = model.model_id',
+            ],
+            'val' => [],
         ];
         $opts = [
             'ORDER BY cat.cat_id DESC',
@@ -101,7 +104,7 @@ class CatIndex {
     }
 
     public function getCars() {
-        $cars = $this->getCatPage();
+        $cars = tools::safeString($this->getCatPage());
         try {
             foreach ($cars as &$car) {
                 $car['id'] = !empty($car['id']) ? $car['id'] : 'unknown';
